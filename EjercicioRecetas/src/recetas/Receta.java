@@ -9,6 +9,7 @@ public class Receta {
 	public Receta(int pag, String[] ing, int canting) {
 		this.pagina = pag;
 		this.ingredientes = new String [canting];
+		
 		for (int i = 0; i<canting; i++) {
 			this.ingredientes[i]=ing[i];
 		}

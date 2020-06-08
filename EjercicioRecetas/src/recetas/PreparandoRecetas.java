@@ -1,20 +1,24 @@
 package recetas;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
+import java.util.*;
 
 public class PreparandoRecetas {
 
 	public static void main(String[] args) {
 		try {
 			
-			FileReader fr = new FileReader("Libro.txt");
-			BufferedReader buffer = new BufferedReader(fr);
+			Scanner scan = new Scanner(new File("Libro.txt"));
 			
-			int cantidadIngredientesH = buffer.read();
-			int cantidadPaginas = buffer.read();
+			int cantidadIngredientesH = scan.nextInt();
+			System.out.println(cantidadIngredientesH);
+			int cantidadPaginas = scan.nextInt();
+			System.out.println(cantidadPaginas);
+			scan.nextLine();
+		
 			
-			Heladera miHeladera =  new Heladera (cantidadIngredientesH, buffer.readLine().split(" ", cantidadIngredientesH));
+			Heladera miHeladera =  new Heladera (cantidadIngredientesH, scan.nextLine().split(" ", cantidadIngredientesH-1));
+			
 			
 			String [] lista;
 			int cantIng;
@@ -23,13 +27,24 @@ public class PreparandoRecetas {
 			
 			for (int i=0; i<cantidadPaginas ; i++) {
 				
-				cantIng = buffer.read();
+				cantIng = scan.nextInt();
 				lista = new String[cantIng];
-				lista = buffer.readLine().split(" ", cantIng);
-				miLibro.agregarReceta(i+1, lista, cantIng);
+				lista = scan.nextLine().split(" ", cantIng-1);
+				miLibro.agregarReceta(i, lista, cantIng-1);
 				
 			}
-			buffer.close();
+			scan.close();
+			
+			
+			List<String> listaHel = Arrays.asList(miHeladera.getIngredientes());//convierto el array de ingredientes de la heladera a una lista
+			for (int i=0;i<miLibro.getCantPaginas();i++) {
+				
+				List<String> listaIng = Arrays.asList(miLibro.getReceta(i).getIngredientes());//convierto el array de ingredientes de la receta a una lista
+				
+				if (listaIng.containsAll(listaHel)) { //para poder usar la funcion containsAll
+					System.out.println("Receta realizable en pagina: "+miLibro.getReceta(i).getPagina());
+				}
+			}
 			
 			
 		}catch(Exception error){
