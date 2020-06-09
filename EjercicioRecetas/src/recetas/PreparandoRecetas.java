@@ -11,13 +11,11 @@ public class PreparandoRecetas {
 			Scanner scan = new Scanner(new File("Libro.txt"));
 			
 			int cantidadIngredientesH = scan.nextInt();
-			System.out.println(cantidadIngredientesH);
 			int cantidadPaginas = scan.nextInt();
-			System.out.println(cantidadPaginas);
 			scan.nextLine();
 		
 			
-			Heladera miHeladera =  new Heladera (cantidadIngredientesH, scan.nextLine().split(" ", cantidadIngredientesH-1));
+			Heladera miHeladera =  new Heladera (cantidadIngredientesH, scan.nextLine().split(" ", cantidadIngredientesH));
 			
 			
 			String [] lista;
@@ -28,9 +26,14 @@ public class PreparandoRecetas {
 			for (int i=0; i<cantidadPaginas ; i++) {
 				
 				cantIng = scan.nextInt();
+				String aux;
 				lista = new String[cantIng];
-				lista = scan.nextLine().split(" ", cantIng-1);
-				miLibro.agregarReceta(i, lista, cantIng-1);
+				
+				aux = scan.nextLine();
+				
+				lista = scan.nextLine().split(" ", cantIng);
+			
+				miLibro.agregarReceta(i, lista, cantIng);
 				
 			}
 			scan.close();
@@ -40,8 +43,8 @@ public class PreparandoRecetas {
 			for (int i=0;i<miLibro.getCantPaginas();i++) {
 				
 				List<String> listaIng = Arrays.asList(miLibro.getReceta(i).getIngredientes());//convierto el array de ingredientes de la receta a una lista
-				
-				if (listaIng.containsAll(listaHel)) { //para poder usar la funcion containsAll
+				System.out.println(listaIng.containsAll(listaHel));
+				if (listaIng.containsAll(listaHel) == true ) {//para poder usar la funcion containsAll
 					System.out.println("Receta realizable en pagina: "+miLibro.getReceta(i).getPagina());
 				}
 			}

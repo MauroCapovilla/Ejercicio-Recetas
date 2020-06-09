@@ -19,10 +19,6 @@ public class Libro {
 		return pagina[pag];
 	}
 
-	public Receta[] getPagina() {
-		return pagina;
-	}
-
 	public void setPagina(int indice, Receta rec) {
 		this.pagina[indice] = rec;
 	}
