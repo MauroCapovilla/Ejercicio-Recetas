@@ -26,10 +26,10 @@ public class PreparandoRecetas {
 			for (int i=0; i<cantidadPaginas ; i++) {
 				
 				cantIng = scan.nextInt();
-				String aux;
+				
 				lista = new String[cantIng];
 				
-				aux = scan.nextLine();
+				scan.nextLine();
 				
 				lista = scan.nextLine().split(" ", cantIng);
 			
@@ -43,9 +43,8 @@ public class PreparandoRecetas {
 			for (int i=0;i<miLibro.getCantPaginas();i++) {
 				
 				List<String> listaIng = Arrays.asList(miLibro.getReceta(i).getIngredientes());//convierto el array de ingredientes de la receta a una lista
-				System.out.println(listaIng.containsAll(listaHel));
-				if (listaIng.containsAll(listaHel) == true ) {//para poder usar la funcion containsAll
-					System.out.println("Receta realizable en pagina: "+miLibro.getReceta(i).getPagina());
+				if (listaHel.containsAll(listaIng) == true ) {//para poder usar la funcion containsAll
+					System.out.println("Receta realizable en pagina: "+(int)(miLibro.getReceta(i).getPagina()+1));
 				}
 			}
 			

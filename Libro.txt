@@ -1,7 +1,7 @@
 5 6
 ajo papa cebolla morron picada
-3
-papa cebolla picada
+4
+papa cebolla picada papa
 2
 morron fideos
 4
